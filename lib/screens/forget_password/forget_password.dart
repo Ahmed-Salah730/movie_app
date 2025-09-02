@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/utils/app_images.dart';
 import 'package:movie_app/utils/widgets/intro_button.dart';
-import '../screens/login/login_screen.dart';
-import '../utils/widgets/login_text_field.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_styles.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/app_styles.dart';
+import '../../utils/widgets/login_text_field.dart';
+import '../login/login_screen.dart';
 
 class ForgetPassword extends StatelessWidget {
   static const String routeName = "/forget";
