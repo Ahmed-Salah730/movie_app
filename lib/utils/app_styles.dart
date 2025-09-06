@@ -34,6 +34,12 @@ class AppStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle yellow20Bold = TextStyle(
+    color: AppColors.yellow,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle black20w600 = TextStyle(
     color: AppColors.black,
     fontSize: 20,

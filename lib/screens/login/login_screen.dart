@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/utils/widgets/login_text_field.dart';
 import 'package:movie_app/screens/register/register_screen.dart';
 import 'package:movie_app/utils/app_images.dart';
 import 'package:movie_app/utils/app_styles.dart';
 import 'package:movie_app/utils/widgets/intro_button.dart';
+import 'package:movie_app/utils/widgets/login_text_field.dart';
+
 import '../../utils/app_colors.dart';
 import '../forget_password/forget_password.dart';
+import '../home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "/login";
@@ -56,7 +58,11 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: screenHeight * 0.035),
-              IntroButton(text: 'Login', onPressed: () {}),
+              IntroButton(text: 'Login', onPressed: () {
+                Navigator.pushReplacementNamed(
+                    context,
+                    HomeScreen.routeName);
+              }),
               SizedBox(height: screenHeight * 0.03),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/screens/forget_password/forget_password.dart';
+import 'package:movie_app/screens/home/home_screen.dart';
 import 'package:movie_app/screens/intro/intro_screen.dart';
 import 'package:movie_app/screens/login/login_screen.dart';
 import 'package:movie_app/screens/register/register_screen.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         IntroScreen.routeName: (_) => IntroScreen(),
         RegisterScreen.routeName: (_) => RegisterScreen(),
         ForgetPassword.routeName: (_) => ForgetPassword(),
+        HomeScreen.routeName: (_) => HomeScreen(),
       },
     );
   }
