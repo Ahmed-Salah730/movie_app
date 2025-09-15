@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/screens/home/explore_tab/explore_tab.dart';
-import 'package:movie_app/screens/home/home_tab/home_tab.dart';
-import 'package:movie_app/screens/home/profile_tab/profile_tab.dart';
-import 'package:movie_app/screens/home/search_tab/search_tab.dart';
-import 'package:movie_app/utils/app_colors.dart';
-import 'package:movie_app/utils/app_images.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/screens/home/profile_tab/profile_tab.dart';
+import 'package:movies_app/screens/home/search_tab/search_tab.dart';
+
+import '../../cubits/app_cubit.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/app_images.dart';
+import 'explore_tab/explore_tab.dart';
+import 'home_tab/home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -26,48 +29,54 @@ class _HomeScreenState extends State<HomeScreen> {
     screenWidth = MediaQuery.of(context).size.width; //  430
     screenHeight = MediaQuery.of(context).size.height; //  932
 
-    return Scaffold(
-      body: backgroundStyle(selectedIndex),
+    return BlocProvider(
+        create: (_) => AppCubit(),
+        child: BlocBuilder<AppCubit, AppState>(
+          builder: (context, state) {
+            final cubit = context.read<AppCubit>();
 
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: AppColors.gray,
-          scaffoldBackgroundColor: AppColors.black,
-        ),
-
-        child: BottomNavigationBar(
-          backgroundColor: Colors.black,
-          elevation: 0,
-          iconSize: 22,
-          showSelectedLabels: false,
-          selectedItemColor: AppColors.yellow,
-          unselectedItemColor: AppColors.white,
-          currentIndex: selectedIndex,
-          onTap: (int index) {
-            selectedIndex = index;
-            setState(() {});
+            return Scaffold(
+              body: backgroundStyle(selectedIndex),
+              bottomNavigationBar: Theme(
+                data: Theme.of(context).copyWith(
+                  canvasColor: AppColors.gray,
+                  scaffoldBackgroundColor: AppColors.black,
+                ),
+                child: BottomNavigationBar(
+                  backgroundColor: Colors.black,
+                  elevation: 0,
+                  iconSize: 22,
+                  showSelectedLabels: false,
+                  selectedItemColor: AppColors.yellow,
+                  unselectedItemColor: AppColors.white,
+                  currentIndex: selectedIndex,
+                  onTap: (int index) {
+                    selectedIndex = index;
+                    setState(() {});
+                  },
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage(AppImages.homeIcon)),
+                      label: "Home",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage(AppImages.searchIcon)),
+                      label: "Search",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage(AppImages.exploreIcon)),
+                      label: "Explore",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage(AppImages.profileIcon)),
+                      label: "Profile",
+                    ),
+                  ],
+                ),
+              ),
+            );
           },
-          items: [
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(AppImages.homeIcon)),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(AppImages.searchIcon)),
-              label: "Search",
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(AppImages.exploreIcon)),
-              label: "Explore",
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(AppImages.profileIcon)),
-              label: "Profile",
-            ),
-          ],
-        ),
-      ),
-    );
+        ));
   }
 
   Widget backgroundStyle(int index) {

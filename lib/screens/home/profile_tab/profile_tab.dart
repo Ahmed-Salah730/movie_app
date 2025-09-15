@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/screens/login/login_screen.dart';
-import 'package:movie_app/utils/app_images.dart';
-import 'package:movie_app/utils/app_styles.dart';
-import 'package:movie_app/utils/widgets/intro_button.dart';
+import 'package:movies_app/screens/update_profile/update_profile.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../../utils/app_images.dart';
+import '../../../utils/app_styles.dart';
+import '../../../utils/widgets/intro_button.dart';
+import '../../login/login_screen.dart';
 
-class ProfileTab extends StatelessWidget {
+class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
+
+  static const String routeName = "/profile";
+
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +29,7 @@ class ProfileTab extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 8, right: 8, left: 8),
+            padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
             color: AppColors.gray,
             child: Column(
               children: [
@@ -32,7 +42,7 @@ class ProfileTab extends StatelessWidget {
                         SizedBox(
                           height: screenHeight * 0.13,
                           width: screenWidth * 0.27,
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             foregroundImage: AssetImage(AppImages.avatar),
                           ),
                         ),
@@ -50,7 +60,7 @@ class ProfileTab extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "12",
+                          "0",
                           style: AppStyles.white36medium.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -70,7 +80,7 @@ class ProfileTab extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "10",
+                          "0",
                           style: AppStyles.white36medium.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -95,7 +105,10 @@ class ProfileTab extends StatelessWidget {
                       flex: 2,
                       child: IntroButton(
                         text: "Edit Profile",
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, UpdateProfile.routeName);
+                        },
                       ),
                     ),
 
@@ -119,7 +132,7 @@ class ProfileTab extends StatelessWidget {
                             screenHeight * 0.06,
                           ),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text("Exit", style: AppStyles.white16Regular),
@@ -135,29 +148,57 @@ class ProfileTab extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Column(
-                        children: [
-                          Icon(Icons.list, size: 40, color: AppColors.yellow),
-                          Text("Watch List", style: AppStyles.white16Regular),
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = 0;
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            const Icon(Icons.list,
+                                size: 40, color: AppColors.yellow),
+                            const Text("Watch List",
+                                style: AppStyles.white16Regular),
+                            const SizedBox(height: 8),
+                            Container(
+                              height: 3,
+                              color: selectedIndex == 0
+                                  ? AppColors.yellow
+                                  : Colors.transparent,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-
-                    SizedBox(width: screenWidth * 0.02),
-
                     Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(Icons.folder, size: 40, color: AppColors.yellow),
-                          Text("History", style: AppStyles.white16Regular),
-                          Container(color: AppColors.yellow, height: 2),
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = 1;
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            const Icon(Icons.folder,
+                                size: 40, color: AppColors.yellow),
+                            const Text("History",
+                                style: AppStyles.white16Regular),
+                            const SizedBox(height: 8),
+                            Container(
+                              height: 3,
+                              color: selectedIndex == 1
+                                  ? AppColors.yellow
+                                  : Colors.transparent,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: screenHeight * 0.02),
+
+                // SizedBox(height: screenHeight * 0.02),
               ],
             ),
           ),

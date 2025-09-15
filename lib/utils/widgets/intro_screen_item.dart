@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/utils/widgets/back_button.dart';
+
 import '../../screens/login/login_screen.dart';
 import '../app_colors.dart';
 import '../app_styles.dart';
+import 'back_button.dart';
 import 'intro_button.dart';
 
 class IntroScreenItem extends StatelessWidget {

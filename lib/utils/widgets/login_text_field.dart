@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/utils/app_colors.dart';
-import 'package:movie_app/utils/app_styles.dart';
+
+import '../app_colors.dart';
+import '../app_styles.dart';
 
 class LoginTextField extends StatelessWidget {
   final String hintText;
   final Icon prefixIcon;
+  final TextEditingController? controller;
+  final bool obscureText;
+  final String? Function(String?)? validator;
+  final VoidCallback? toggleObscure;
+
   const LoginTextField({
     super.key,
     required this.hintText,
-    required this.prefixIcon
+    required this.prefixIcon,
+    this.controller,
+    this.validator,
+    this.obscureText = false,
+    this.toggleObscure,
   });
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;       //  430
-    double screenHeight = MediaQuery.of(context).size.height;     //  932
+    double screenHeight = MediaQuery.of(context).size.height; //  932
 
     return Container(
       color: Colors.transparent,
-      height: screenHeight * 0.06,
+      height: screenHeight * 0.09,
       child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        validator: validator,
         style: AppStyles.white16Regular,
         cursorColor: AppColors.white,
         decoration: InputDecoration(
@@ -27,26 +39,36 @@ class LoginTextField extends StatelessWidget {
           filled: true,
           hintText: hintText,
           hintStyle: AppStyles.white16Regular,
-
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: AppColors.gray)
+            borderSide: BorderSide(color: AppColors.gray),
           ),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: AppColors.gray)
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: AppColors.yellow),
           ),
           errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: AppColors.gray)
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.red),
           ),
           focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: AppColors.gray)
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.red),
           ),
-          contentPadding: EdgeInsets.symmetric(vertical: screenHeight * 0.014),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: screenHeight * 0.01,
+          ),
           prefixIcon: prefixIcon,
-          prefixIconColor: AppColors.white
+          prefixIconColor: AppColors.white,
+          suffixIcon: toggleObscure != null
+              ? IconButton(
+                  icon: Icon(
+                    obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: AppColors.white,
+                  ),
+                  onPressed: toggleObscure,
+                )
+              : null,
         ),
       ),
     );

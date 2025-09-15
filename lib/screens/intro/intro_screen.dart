@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/utils/app_images.dart';
-import 'package:movie_app/utils/widgets/intro_button.dart';
-import 'package:movie_app/utils/widgets/intro_screen_item.dart';
+
 import '../../utils/app_colors.dart';
+import '../../utils/app_images.dart';
 import '../../utils/app_styles.dart';
+import '../../utils/widgets/intro_button.dart';
+import '../../utils/widgets/intro_screen_item.dart';
 
 class IntroScreen extends StatelessWidget {
   static const String routeName = "/intro";
